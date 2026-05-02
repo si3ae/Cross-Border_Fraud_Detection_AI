@@ -1,11 +1,12 @@
 # Global Shell-Tracker (BakerStreet)
 
 > A multi-signal fraud detection system with a verifiable reasoning
-> interface — integrating multi-signal detection into a verifiable
-> reasoning interface for cross-border financial investigation.
+> interface — built for cross-border shell company and AML
+> investigation across secrecy jurisdictions (BVI, Singapore, Delaware,
+> Cayman, Switzerland).
 >
-> Currently in architecture design phase; synthetic data generation
-> (Nemotron-4) starting.
+> Currently in architecture design phase; synthetic data pipeline
+> implementation starting.
 
 [![Status](https://img.shields.io/badge/status-architecture%20defined-blue)](#)
 [![Phase](https://img.shields.io/badge/phase-1%20implementation%20starting-orange)](#)
@@ -18,7 +19,7 @@
 
 This repository currently holds the **system design and context**, not
 working code. Implementation is starting in Phase 1 (synthetic data
-generation via Nemotron-4).
+pipeline using IBM AML-Data and ICIJ Offshore Leaks as seeds).
 
 The README is structured to make the design verifiable:
 * What is being built and why
@@ -30,30 +31,32 @@ The README is structured to make the design verifiable:
 
 ## The Problem
 
-Cross-border financial fraud evades single-signal detection because the
-pattern is distributed across layers:
+Cross-border shell company fraud evades single-signal detection because
+the pattern is distributed across layers:
 
 * **Unstructured documents** — invoices and emails with subtle linguistic
   anomalies that don't trigger keyword filters
-* **Fragmented entity data** — inconsistent identities across jurisdictions,
-  legitimate by themselves but suspicious in aggregate
+* **Fragmented entity data** — inconsistent identities across
+  jurisdictions, legitimate by themselves but suspicious in aggregate
 * **Hidden relationships** — indirect links between entities (shared
-  accounts, common IPs, recurring representatives) that surface only when
-  modeled as a graph
+  registered agents, common nominee directors, matching IP addresses)
+  that surface only when modeled as a graph
 
 The gap isn't in any one detector — it's in the integration. Existing
-specialized tools (Palantir-class) handle this but require expert operators
-and substantial licensing budgets. The goal here is to make the same
-class of pattern recognition operable by junior investigators — by
-externalizing the reasoning process itself, not just the result.
+specialized tools (Palantir-class) handle this but require expert
+operators and substantial licensing budgets. The goal here is to make
+the same class of pattern recognition operable by junior compliance
+analysts and investigative journalists — by externalizing the reasoning
+process itself, not just the result.
 
 ---
 
 ## Approach
 
-A modular three-signal pipeline feeds into a fusion layer; outputs are
-then externalized through a dedicated reasoning interface (BakerStreet)
-rather than reduced to a single risk score.
+A modular pipeline separates **detection** (deterministic algorithms)
+from **structuring** (LLM-based reasoning); outputs are then externalized
+through a dedicated reasoning interface (BakerStreet) rather than reduced
+to a single risk score.
 
 ### Signal layers
 
@@ -62,47 +65,77 @@ financial documents. Flags anomalies in tone, formatting, and metadata
 patterns that may indicate fabricated or manipulated records.
 
 **Entity verification** — validates consistency across structured data
-sources. Handles entity resolution across jurisdiction-inconsistent records.
-Detects red flags in identity attributes and cross-reference mismatches.
+sources. Handles entity resolution across jurisdiction-inconsistent
+records. Detects red flags in identity attributes and cross-reference
+mismatches.
 
 **Relationship modeling** — represents connections between entities,
-accounts, and IPs as a graph structure. Surfaces indirect or hidden links
-that may indicate shell company patterns or coordinated fraud networks
-(e.g. circular fund flows: A → B → C → A).
+accounts, and IPs as a graph. Surfaces indirect links that may indicate
+shell company patterns (e.g. circular fund flows: A → B → C → A).
 
-### LLM-based reasoning (Gemma)
+### Pattern Detector — deterministic detection
 
-Gemma is not used as a standalone decision-maker, but as a reasoning
-engine that structures evidence into an interpretable format.
+Detection is **not** delegated to the LLM. A deterministic pattern
+detector runs over the raw data and identifies three structural patterns:
 
-Given multi-signal inputs (document, entity, relationship), Gemma:
+* **cycle** — circular fund flows across jurisdictions
+* **hub** — entities sharing a common nominee director or registered
+  agent
+* **dispersion** — single entity holding accounts across multiple
+  jurisdictions
 
-* organizes connections into explicit relationships
-* attaches human-readable evidence to each connection
-* produces both structured graph outputs and textual summaries
+This separation ensures detection results are reproducible and
+verifiable independently of the LLM.
 
-Its role is not detection, but **externalization of reasoning** —
-transforming signals into a form that investigators can inspect and verify.
+### Gemma — structuring, not detection
+
+Gemma's role is **not detection** — it's structuring. Given the
+detector's output (suspect entities + pattern hints) and the relevant
+raw records, Gemma produces:
+
+* edges with explicit `(from, to, type, evidences)` structure
+* each evidence carries a `kind` (e.g. "shared registered agent") and
+  `refs` to specific raw record IDs
+* a brief natural-language summary
+
+The LLM's claims are not trusted blindly. Every evidence reference must
+point to a record in the raw data layer, which is queried independently
+by the frontend to verify consistency.
+
+### Verification Loop
+
+This is the core mechanism that distinguishes BakerStreet from generic
+"explainable AI":
+
+```
+Gemma output: { kind: "shared registered agent", refs: ["reg_007"] }
+        ↓
+Frontend looks up reg_007 in the raw data store
+        ↓
+Checks: does this record actually link the claimed entities?
+        ↓
+Pass → render normally
+Fail → demote evidence visually, log warning
+```
+
+Every visual element (ripples, tags, lines) is a direct mapping of a
+verified evidence claim, not a UI flourish. Investigators can click any
+tag and see the exact raw record that supports it. **The LLM produces
+claims; the frontend verifies them against an independent source.**
 
 ### Interpretation Layer (BakerStreet)
 
-A dedicated visualization and reasoning interface that externalizes the
-inference process into a graph-based, human-verifiable structure.
-
-The pipeline produces an **Inference Graph Layer** as its structural
-output — a graph of nodes (entities, accounts, IPs), edges (relationships
-backed by evidence strings), and pattern hints (e.g. cycle, hub,
-dispersion). BakerStreet renders this graph directly:
+A dedicated visualization interface that renders the **Inference Graph
+Layer** as its structural output:
 
 * entities → nodes
-* relationships → edges
-* evidence → visual tags
+* `flow` edges → directed arrows (fund movement)
+* `shared_attribute` edges → dashed lines (common agent, IP, nominee)
+* evidence → clickable tags backed by raw records
 
-This separation matters: the AI produces the graph, the UI renders the
-graph, and there is no string parsing in between. Every visual element
-(ripples, tags, lines) is a direct mapping of an LLM output token, not a
-UI flourish. Investigators validate connections rather than trust
-predictions.
+The two edge layers are visually separated so investigators can see
+fund flow and shared-attribute clusters as independent dimensions of
+suspicion that reinforce each other.
 
 ---
 
@@ -110,25 +143,32 @@ predictions.
 
 ```
 Input
-  ├── Financial documents (invoices, emails)
-  ├── Structured entity records
-  └── Transaction metadata
+  ├── Synthetic transactions (IBM AML-Data seed)
+  ├── Synthetic entities (ICIJ Offshore Leaks seed, structure only)
+  └── Synthesized narrative (Nemotron-4: names, transaction memos)
           │
-  ┌───────┼───────┐
-  ▼       ▼       ▼
- Doc   Entity  Relationship
-Analysis Verify  Modeling
-  └───────┼───────┘
+          ▼
+   Raw Data Layer  ── independent verification source
           │
+          ▼
+   Pattern Detector  ── deterministic (cycle / hub / dispersion)
+          │
+          ▼
+   Pre-filter  ── extracts suspects + relevant records
+          │
+          ▼
    Gemma reasoning engine
-   (signal → structured evidence)
+   (structures evidence, attaches raw record refs, writes summary)
           │
+          ▼
    Inference Graph Layer
-   (nodes, edges, evidence)
+   (nodes, edges, evidence with refs)
+          │
+          ▼ (verification: independent lookup in raw store)
           │
     ┌─────┴─────┐
  Risk Score   BakerStreet
-  (0–100)    (graph + tags + rationale)
+  (0–100)    (graph + verified tags + rationale)
 ```
 
 ---
@@ -137,28 +177,29 @@ Analysis Verify  Modeling
 
 A few decisions worth being explicit about at this stage:
 
-* **Separation of detection and interpretation** — the system
-  distinguishes between signal generation (detection layers) and
-  reasoning externalization (BakerStreet interface), ensuring that
-  model outputs remain verifiable rather than opaque. This is the core
-  philosophy of the project.
+* **Detection vs. structuring separation** — detection is deterministic
+  and reproducible; the LLM only structures already-detected suspicion
+  into human-readable form. This avoids the trap of using an LLM to
+  validate its own output.
 
-* **Synthetic data over real data, initially** — fraud datasets with
-  ground-truth labels are scarce and licensing-heavy. Nemotron-4 generates
-  three structural patterns (circular flows, multi-account dispersion,
-  hub accounts) seeded from public Kaggle and government fraud datasets
-  to preserve statistical similarity. This unblocks development without
-  data access negotiations.
+* **Verification loop over post-hoc explanation** — every LLM claim
+  carries raw record references that the frontend independently
+  verifies. This is the project's core philosophy: the LLM produces
+  claims, an independent layer checks them.
+
+* **Synthetic data with public seeds, initially** — fraud datasets with
+  ground-truth labels are scarce and licensing-heavy. The pipeline uses
+  IBM AML-Data (transaction patterns + laundering labels) and ICIJ
+  Offshore Leaks (entity structure, jurisdiction distribution,
+  registered agent patterns) as seeds. Nemotron-4 synthesizes natural
+  language elements (entity names, transaction memos) on top of this
+  structure. Statistical similarity is bounded to marginal
+  distributions; structural patterns (cycle, hub, dispersion) are
+  imposed as explicit constraints rather than claimed as emergent.
 
 * **Graph reasoning over rule-based** — relationship signals matter more
   than any single transaction, so the relationship layer is graph-native
   from the start rather than retrofitted onto a tabular pipeline.
-
-* **Interpretability as a first-class output, not a post-hoc explanation** —
-  the rationale is generated from the same evidence chain used in
-  detection, not reconstructed afterward. This is the same pattern
-  established in [Dandi](https://github.com/si3ae/Dandi-AI_Accounting_Automation_System)
-  for expenditure alerts: baseline → deviation → alert → rationale.
 
 * **Modular signal layers** — each detector (document, entity,
   relationship) is independently testable and replaceable. Fusion is a
@@ -173,10 +214,12 @@ Things still being worked out:
 * Weighting strategy in the fusion layer — equal, learned, or
   rule-prioritized
 * Confidence calibration when only one or two signals fire
-* Graph traversal depth limits for the relationship layer (false-positive
-  trade-off)
+* Graph traversal depth limits for the relationship layer
+  (false-positive trade-off)
 * BakerStreet interface — animation timing and graph layout strategy
   for cases with 10+ entities
+* Tie-breaking rules in derived state (top accounts, hub nodes) when
+  degree values collide
 
 ---
 
@@ -184,12 +227,12 @@ Things still being worked out:
 
 | Layer | Technology |
 |---|---|
-| Synthetic data | Nemotron-4 |
+| Synthetic data seeds | IBM AML-Data (Kaggle), ICIJ Offshore Leaks |
+| Narrative synthesis | Nemotron-4 (via NVIDIA NIM) |
 | Core pipeline | Python |
-| Data layer | SQL |
-| Relationship modeling | Graph-based (library TBD) |
+| Pattern detection | Deterministic (Python, graph algorithms) |
 | Reasoning engine | Gemma (via NVIDIA NIM) |
-| Interpretation interface | React + SVG + Framer Motion (BakerStreet) |
+| Interpretation interface | React + Zustand + SVG + Framer Motion (BakerStreet) |
 
 ---
 
@@ -197,19 +240,22 @@ Things still being worked out:
 
 Currently starting:
 
-* Nemotron-4 synthetic data generation — three pattern types
-* Pattern fidelity validation against public fraud-data baselines
+* Data acquisition — IBM AML-Data and ICIJ Offshore Leaks
+* Synthetic data pipeline — entity/account/transaction merging,
+  structural pattern injection, raw record cross-referencing
+* Pattern Detector — cycle/hub/dispersion algorithms
 * Document signal extractor — initial prototype
 
 Not yet started: entity verification module, relationship graph layer,
 Gemma reasoning integration, BakerStreet interface implementation,
-fusion logic.
+fusion logic, Nemotron narrative synthesis.
 
 ---
 
 ## Related Projects
 
-The same interpretability-first pattern, applied across financial domains:
+The same interpretability-first pattern, applied across financial
+domains:
 
 > **[Dandi](https://github.com/si3ae/Dandi-AI_Accounting_Automation_System)** — civic-level financial AI for cash-heavy SMBs;
 > shipped working prototype; same anomaly detection pattern (baseline →
