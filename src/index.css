@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #FDF5E6;
+  font-family: 'Courier Prime', 'Special Elite', monospace;
+}

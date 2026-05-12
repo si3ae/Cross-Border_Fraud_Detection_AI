@@ -1,0 +1,1254 @@
+{
+  "meta": {
+    "generated_at": "2026-05-08T08:30:47.911604+00:00",
+    "model_used": "google/gemma-3-4b-it",
+    "gemma_summary": "A cycle involving multiple BVI entities, linked through shared agents, addresses, and transactions, with a hub role played by Singaporean entities.",
+    "gemma_pattern": [
+      "cycle",
+      "hub"
+    ]
+  },
+  "stats": {
+    "edges_total": 16,
+    "edges_verified": 8,
+    "edges_demoted": 8,
+    "evidences_total": 17,
+    "evidences_verified": 8,
+    "evidences_demoted": 9
+  },
+  "entities": [
+    {
+      "id": "ent_10055649",
+      "jurisdiction": "Panama",
+      "name": "QUEZEL MANAGEMENT INC."
+    },
+    {
+      "id": "ent_10092001",
+      "jurisdiction": "BVI",
+      "name": "KOPTECH INVESTMENTS LTD."
+    },
+    {
+      "id": "ent_10171875",
+      "jurisdiction": "Cyprus",
+      "name": "TILIKO LIMITED"
+    },
+    {
+      "id": "ent_10194403",
+      "jurisdiction": "BVI",
+      "name": "ADAMO PROPERTIES LIMITED"
+    },
+    {
+      "id": "ent_10201450",
+      "jurisdiction": "BVI",
+      "name": "TOUCH INDUSTRIES CO., LIMITED"
+    },
+    {
+      "id": "ent_167069",
+      "jurisdiction": "Singapore",
+      "name": "The Green Point Trust"
+    },
+    {
+      "id": "ent_171249",
+      "jurisdiction": "Singapore",
+      "name": "DELTA ADVISORY PTE. LTD."
+    },
+    {
+      "id": "ent_20025246",
+      "jurisdiction": "Bahamas",
+      "name": "LAKELAND INVESTMENTS S.A."
+    },
+    {
+      "id": "ent_20132624",
+      "jurisdiction": "Bahamas",
+      "name": "Miko Valley Ltd."
+    },
+    {
+      "id": "ent_240240462",
+      "jurisdiction": "BVI",
+      "name": "ARCH Secretaries Limited"
+    },
+    {
+      "id": "ent_240247005",
+      "jurisdiction": "BVI",
+      "name": "Special Situations Global Limited"
+    },
+    {
+      "id": "ent_55037966",
+      "jurisdiction": "Malta",
+      "name": "PATERNA SHIPPING LIMITED"
+    },
+    {
+      "id": "ent_82009979",
+      "jurisdiction": "Cayman",
+      "name": "Galaxy Quantitative Fund SPC"
+    },
+    {
+      "id": "ent_82012096",
+      "jurisdiction": "Cayman",
+      "name": "Desdemona Corp."
+    },
+    {
+      "id": "ent_82012826",
+      "jurisdiction": "Delaware",
+      "name": "The Peritus Fund GP, LLC"
+    }
+  ],
+  "edges": [
+    {
+      "from": "ent_10194403",
+      "to": "ent_20132624",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_01"
+          ],
+          "verification": {
+            "status": "demoted",
+            "failure_codes": [
+              "FLOW_DIRECTION_MISMATCH"
+            ],
+            "details": [
+              "edge ent_10194403→ent_20132624 but tx_cycle_01 routes ent_55037966→ent_20132624"
+            ]
+          }
+        },
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_02"
+          ],
+          "verification": {
+            "status": "demoted",
+            "failure_codes": [
+              "FLOW_DIRECTION_MISMATCH"
+            ],
+            "details": [
+              "edge ent_10194403→ent_20132624 but tx_cycle_02 routes ent_20132624→ent_10171875"
+            ]
+          }
+        }
+      ],
+      "verification": {
+        "status": "demoted",
+        "failure_codes": [
+          "FLOW_DIRECTION_MISMATCH"
+        ]
+      }
+    },
+    {
+      "from": "ent_10171875",
+      "to": "ent_240240462",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_03"
+          ],
+          "verification": {
+            "status": "verified",
+            "failure_codes": [],
+            "details": []
+          }
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "failure_codes": []
+      }
+    },
+    {
+      "from": "ent_240240462",
+      "to": "ent_240247005",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_04"
+          ],
+          "verification": {
+            "status": "verified",
+            "failure_codes": [],
+            "details": []
+          }
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "failure_codes": []
+      }
+    },
+    {
+      "from": "ent_240247005",
+      "to": "ent_10055649",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_05"
+          ],
+          "verification": {
+            "status": "verified",
+            "failure_codes": [],
+            "details": []
+          }
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "failure_codes": []
+      }
+    },
+    {
+      "from": "ent_10055649",
+      "to": "ent_55037966",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_06"
+          ],
+          "verification": {
+            "status": "verified",
+            "failure_codes": [],
+            "details": []
+          }
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "failure_codes": []
+      }
+    },
+    {
+      "from": "ent_82009979",
+      "to": "ent_10201450",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_01"
+          ],
+          "verification": {
+            "status": "demoted",
+            "failure_codes": [
+              "FLOW_DIRECTION_MISMATCH"
+            ],
+            "details": [
+              "edge ent_82009979→ent_10201450 but tx_cycle_01 routes ent_55037966→ent_20132624"
+            ]
+          }
+        }
+      ],
+      "verification": {
+        "status": "demoted",
+        "failure_codes": [
+          "FLOW_DIRECTION_MISMATCH"
+        ]
+      }
+    },
+    {
+      "from": "ent_20025246",
+      "to": "ent_10201450",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_02"
+          ],
+          "verification": {
+            "status": "demoted",
+            "failure_codes": [
+              "FLOW_DIRECTION_MISMATCH"
+            ],
+            "details": [
+              "edge ent_20025246→ent_10201450 but tx_cycle_02 routes ent_20132624→ent_10171875"
+            ]
+          }
+        }
+      ],
+      "verification": {
+        "status": "demoted",
+        "failure_codes": [
+          "FLOW_DIRECTION_MISMATCH"
+        ]
+      }
+    },
+    {
+      "from": "ent_171249",
+      "to": "ent_10201450",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_03"
+          ],
+          "verification": {
+            "status": "demoted",
+            "failure_codes": [
+              "FLOW_DIRECTION_MISMATCH"
+            ],
+            "details": [
+              "edge ent_171249→ent_10201450 but tx_cycle_03 routes ent_10171875→ent_240240462"
+            ]
+          }
+        }
+      ],
+      "verification": {
+        "status": "demoted",
+        "failure_codes": [
+          "FLOW_DIRECTION_MISMATCH"
+        ]
+      }
+    },
+    {
+      "from": "ent_82012826",
+      "to": "ent_10092001",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_01"
+          ],
+          "verification": {
+            "status": "demoted",
+            "failure_codes": [
+              "FLOW_DIRECTION_MISMATCH"
+            ],
+            "details": [
+              "edge ent_82012826→ent_10092001 but tx_cycle_01 routes ent_55037966→ent_20132624"
+            ]
+          }
+        }
+      ],
+      "verification": {
+        "status": "demoted",
+        "failure_codes": [
+          "FLOW_DIRECTION_MISMATCH"
+        ]
+      }
+    },
+    {
+      "from": "ent_82012826",
+      "to": "ent_167069",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_02"
+          ],
+          "verification": {
+            "status": "demoted",
+            "failure_codes": [
+              "FLOW_DIRECTION_MISMATCH"
+            ],
+            "details": [
+              "edge ent_82012826→ent_167069 but tx_cycle_02 routes ent_20132624→ent_10171875"
+            ]
+          }
+        }
+      ],
+      "verification": {
+        "status": "demoted",
+        "failure_codes": [
+          "FLOW_DIRECTION_MISMATCH"
+        ]
+      }
+    },
+    {
+      "from": "ent_82012826",
+      "to": "ent_10194403",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_03"
+          ],
+          "verification": {
+            "status": "demoted",
+            "failure_codes": [
+              "FLOW_DIRECTION_MISMATCH"
+            ],
+            "details": [
+              "edge ent_82012826→ent_10194403 but tx_cycle_03 routes ent_10171875→ent_240240462"
+            ]
+          }
+        }
+      ],
+      "verification": {
+        "status": "demoted",
+        "failure_codes": [
+          "FLOW_DIRECTION_MISMATCH"
+        ]
+      }
+    },
+    {
+      "from": "ent_82012826",
+      "to": "ent_82012096",
+      "type": "flow",
+      "evidences": [
+        {
+          "kind": "wire transfer",
+          "refs": [
+            "tx_cycle_04"
+          ],
+          "verification": {
+            "status": "demoted",
+            "failure_codes": [
+              "FLOW_DIRECTION_MISMATCH"
+            ],
+            "details": [
+              "edge ent_82012826→ent_82012096 but tx_cycle_04 routes ent_240240462→ent_240247005"
+            ]
+          }
+        }
+      ],
+      "verification": {
+        "status": "demoted",
+        "failure_codes": [
+          "FLOW_DIRECTION_MISMATCH"
+        ]
+      }
+    },
+    {
+      "from": "ent_240240462",
+      "to": "ent_240247005",
+      "type": "shared_attribute",
+      "evidences": [
+        {
+          "kind": "same registration address",
+          "refs": [
+            "reg_address_001"
+          ],
+          "verification": {
+            "status": "verified",
+            "failure_codes": [],
+            "details": []
+          }
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "failure_codes": []
+      }
+    },
+    {
+      "from": "ent_55037966",
+      "to": "ent_10055649",
+      "type": "shared_attribute",
+      "evidences": [
+        {
+          "kind": "shared registered agent",
+          "refs": [
+            "reg_agent_001"
+          ],
+          "verification": {
+            "status": "verified",
+            "failure_codes": [],
+            "details": []
+          }
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "failure_codes": []
+      }
+    },
+    {
+      "from": "ent_10201450",
+      "to": "ent_171249",
+      "type": "shared_attribute",
+      "evidences": [
+        {
+          "kind": "shared registered agent",
+          "refs": [
+            "reg_agent_002"
+          ],
+          "verification": {
+            "status": "verified",
+            "failure_codes": [],
+            "details": []
+          }
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "failure_codes": []
+      }
+    },
+    {
+      "from": "ent_10092001",
+      "to": "ent_82012826",
+      "type": "shared_attribute",
+      "evidences": [
+        {
+          "kind": "shared beneficial owner",
+          "refs": [
+            "reg_bo_001"
+          ],
+          "verification": {
+            "status": "verified",
+            "failure_codes": [],
+            "details": []
+          }
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "failure_codes": []
+      }
+    }
+  ],
+  "raw_store": {
+    "tx_cycle_01": {
+      "id": "tx_cycle_01",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "803A568D0",
+        "receiver_account": "8012F9500",
+        "sender_bank": "015231",
+        "receiver_bank": "01522",
+        "amount_received": 12633.54,
+        "receiving_currency": "Euro",
+        "amount_paid": 12633.54,
+        "payment_currency": "Euro",
+        "timestamp": "2022/09/02 13:07",
+        "payment_format": "ACH",
+        "pattern_source": "CYCLE",
+        "is_laundering": true
+      }
+    },
+    "tx_cycle_02": {
+      "id": "tx_cycle_02",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "8012F9500",
+        "receiver_account": "8102CA2C0",
+        "sender_bank": "01522",
+        "receiver_bank": "023",
+        "amount_received": 11619.65,
+        "receiving_currency": "Euro",
+        "amount_paid": 11619.65,
+        "payment_currency": "Euro",
+        "timestamp": "2022/09/04 00:45",
+        "payment_format": "ACH",
+        "pattern_source": "CYCLE",
+        "is_laundering": true
+      }
+    },
+    "tx_cycle_03": {
+      "id": "tx_cycle_03",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "8102CA2C0",
+        "receiver_account": "8040FAF80",
+        "sender_bank": "023",
+        "receiver_bank": "009679",
+        "amount_received": 1352779.07,
+        "receiving_currency": "Yen",
+        "amount_paid": 1352779.07,
+        "payment_currency": "Yen",
+        "timestamp": "2022/09/04 04:05",
+        "payment_format": "ACH",
+        "pattern_source": "CYCLE",
+        "is_laundering": true
+      }
+    },
+    "tx_cycle_04": {
+      "id": "tx_cycle_04",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "8040FAF80",
+        "receiver_account": "80AC28E60",
+        "sender_bank": "009679",
+        "receiver_bank": "0025960",
+        "amount_received": 10953.15,
+        "receiving_currency": "Euro",
+        "amount_paid": 10953.15,
+        "payment_currency": "Euro",
+        "timestamp": "2022/09/04 06:08",
+        "payment_format": "ACH",
+        "pattern_source": "CYCLE",
+        "is_laundering": true
+      }
+    },
+    "tx_cycle_05": {
+      "id": "tx_cycle_05",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "80AC28E60",
+        "receiver_account": "80CF37D80",
+        "sender_bank": "0025960",
+        "receiver_bank": "029",
+        "amount_received": 72471.22,
+        "receiving_currency": "Brazil Real",
+        "amount_paid": 72471.22,
+        "payment_currency": "Brazil Real",
+        "timestamp": "2022/09/04 17:54",
+        "payment_format": "ACH",
+        "pattern_source": "CYCLE",
+        "is_laundering": true
+      }
+    },
+    "tx_cycle_06": {
+      "id": "tx_cycle_06",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "80CF37D80",
+        "receiver_account": "803A568D0",
+        "sender_bank": "029",
+        "receiver_bank": "015231",
+        "amount_received": 11766.38,
+        "receiving_currency": "Euro",
+        "amount_paid": 11766.38,
+        "payment_currency": "Euro",
+        "timestamp": "2022/09/05 09:21",
+        "payment_format": "ACH",
+        "pattern_source": "CYCLE",
+        "is_laundering": true
+      }
+    },
+    "tx_fanin_01": {
+      "id": "tx_fanin_01",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "811C599A0",
+        "receiver_account": "811C597B0",
+        "sender_bank": "0048309",
+        "receiver_bank": "0119",
+        "amount_received": 48972.89,
+        "receiving_currency": "Saudi Riyal",
+        "amount_paid": 48972.89,
+        "payment_currency": "Saudi Riyal",
+        "timestamp": "2022/09/01 22:26",
+        "payment_format": "ACH",
+        "pattern_source": "FAN-IN",
+        "is_laundering": true
+      }
+    },
+    "tx_fanin_02": {
+      "id": "tx_fanin_02",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "811B83280",
+        "receiver_account": "811C597B0",
+        "sender_bank": "0222",
+        "receiver_bank": "0119",
+        "amount_received": 64414.15,
+        "receiving_currency": "Saudi Riyal",
+        "amount_paid": 64414.15,
+        "payment_currency": "Saudi Riyal",
+        "timestamp": "2022/09/02 15:47",
+        "payment_format": "ACH",
+        "pattern_source": "FAN-IN",
+        "is_laundering": true
+      }
+    },
+    "tx_fanin_03": {
+      "id": "tx_fanin_03",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "812D22980",
+        "receiver_account": "811C597B0",
+        "sender_bank": "0150240",
+        "receiver_bank": "0119",
+        "amount_received": 64974.79,
+        "receiving_currency": "Saudi Riyal",
+        "amount_paid": 64974.79,
+        "payment_currency": "Saudi Riyal",
+        "timestamp": "2022/09/04 04:53",
+        "payment_format": "ACH",
+        "pattern_source": "FAN-IN",
+        "is_laundering": true
+      }
+    },
+    "tx_fanout_01": {
+      "id": "tx_fanout_01",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "80769F1A0",
+        "receiver_account": "804529040",
+        "sender_bank": "005",
+        "receiver_bank": "018511",
+        "amount_received": 11735.69,
+        "receiving_currency": "US Dollar",
+        "amount_paid": 11735.69,
+        "payment_currency": "US Dollar",
+        "timestamp": "2022/09/02 05:24",
+        "payment_format": "ACH",
+        "pattern_source": "FAN-OUT",
+        "is_laundering": true
+      }
+    },
+    "tx_fanout_02": {
+      "id": "tx_fanout_02",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "80769F1A0",
+        "receiver_account": "811A9BD50",
+        "sender_bank": "005",
+        "receiver_bank": "0132306",
+        "amount_received": 16324.35,
+        "receiving_currency": "US Dollar",
+        "amount_paid": 16324.35,
+        "payment_currency": "US Dollar",
+        "timestamp": "2022/09/03 16:13",
+        "payment_format": "ACH",
+        "pattern_source": "FAN-OUT",
+        "is_laundering": true
+      }
+    },
+    "tx_fanout_03": {
+      "id": "tx_fanout_03",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "80769F1A0",
+        "receiver_account": "800BFCD30",
+        "sender_bank": "005",
+        "receiver_bank": "011474",
+        "amount_received": 16831.49,
+        "receiving_currency": "US Dollar",
+        "amount_paid": 16831.49,
+        "payment_currency": "US Dollar",
+        "timestamp": "2022/09/04 16:59",
+        "payment_format": "ACH",
+        "pattern_source": "FAN-OUT",
+        "is_laundering": true
+      }
+    },
+    "tx_fanout_04": {
+      "id": "tx_fanout_04",
+      "type": "transaction",
+      "payload": {
+        "sender_account": "80769F1A0",
+        "receiver_account": "8020BC410",
+        "sender_bank": "005",
+        "receiver_bank": "004866",
+        "amount_received": 7887.98,
+        "receiving_currency": "US Dollar",
+        "amount_paid": 7887.98,
+        "payment_currency": "US Dollar",
+        "timestamp": "2022/09/05 07:19",
+        "payment_format": "ACH",
+        "pattern_source": "FAN-OUT",
+        "is_laundering": true
+      }
+    },
+    "acct_811C597B0": {
+      "id": "acct_811C597B0",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "811C597B0",
+        "holder_entity_id": "ent_10201450",
+        "holder_metadata": {
+          "icij_node_id": 10201450,
+          "name": "TOUCH INDUSTRIES CO., LIMITED",
+          "jurisdiction": "BVI",
+          "jurisdiction_full": "British Virgin Islands",
+          "service_provider": "Mossack Fonseca",
+          "incorporation_date": "14-DEC-2004",
+          "address": "HKBSS WORLDWIDE LIMITED ROOM 7B; CROSS REGION PLAZA; NO. 899 LINGLING ROAD; SHANGHAI; THE PEOPLE'S REPUBLIC OF CHINA",
+          "sourceID": "Panama Papers"
+        },
+        "role_rationale": "FAN-IN hub. Mossack Fonseca client + BVI registration = strongest shell company signal."
+      }
+    },
+    "acct_80769F1A0": {
+      "id": "acct_80769F1A0",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "80769F1A0",
+        "holder_entity_id": "ent_82012826",
+        "holder_metadata": {
+          "icij_node_id": 82012826,
+          "name": "The Peritus Fund GP, LLC",
+          "jurisdiction": "Delaware",
+          "jurisdiction_full": "State of Delaware",
+          "service_provider": "Appleby",
+          "incorporation_date": "22-OCT-2008",
+          "address": null,
+          "sourceID": "Paradise Papers - Appleby"
+        },
+        "role_rationale": "FAN-OUT hub. Delaware Fund GP structure naturally distributes capital to multiple LPs."
+      }
+    },
+    "acct_803A568D0": {
+      "id": "acct_803A568D0",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "803A568D0",
+        "holder_entity_id": "ent_55037966",
+        "holder_metadata": {
+          "icij_node_id": 55037966,
+          "name": "PATERNA SHIPPING LIMITED",
+          "jurisdiction": "Malta",
+          "jurisdiction_full": "Malta",
+          "service_provider": null,
+          "incorporation_date": "06-MAY-2008",
+          "address": null,
+          "sourceID": "Paradise Papers - Malta corporate registry"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_8012F9500": {
+      "id": "acct_8012F9500",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "8012F9500",
+        "holder_entity_id": "ent_20132624",
+        "holder_metadata": {
+          "icij_node_id": 20132624,
+          "name": "Miko Valley Ltd.",
+          "jurisdiction": "Bahamas",
+          "jurisdiction_full": "Bahamas",
+          "service_provider": null,
+          "incorporation_date": "05-AUG-2004",
+          "address": null,
+          "sourceID": "Bahamas Leaks"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_8102CA2C0": {
+      "id": "acct_8102CA2C0",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "8102CA2C0",
+        "holder_entity_id": "ent_10171875",
+        "holder_metadata": {
+          "icij_node_id": 10171875,
+          "name": "TILIKO LIMITED",
+          "jurisdiction": "Cyprus",
+          "jurisdiction_full": "Cyprus",
+          "service_provider": "Mossack Fonseca",
+          "incorporation_date": "28-JUL-2011",
+          "address": "MOSSACK FONSECA & CO. MOSSFON BUILDING CALLE 54 ESTE PANAMA, REPUBLICA DE PANAMA",
+          "sourceID": "Panama Papers"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_8040FAF80": {
+      "id": "acct_8040FAF80",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "8040FAF80",
+        "holder_entity_id": "ent_240240462",
+        "holder_metadata": {
+          "icij_node_id": 240240462,
+          "name": "ARCH Secretaries Limited",
+          "jurisdiction": "BVI",
+          "jurisdiction_full": "British Virgin Islands",
+          "service_provider": null,
+          "incorporation_date": "29-NOV-2010",
+          "address": null,
+          "sourceID": "Pandora Papers - Commence Overseas"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_80AC28E60": {
+      "id": "acct_80AC28E60",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "80AC28E60",
+        "holder_entity_id": "ent_240247005",
+        "holder_metadata": {
+          "icij_node_id": 240247005,
+          "name": "Special Situations Global Limited",
+          "jurisdiction": "BVI",
+          "jurisdiction_full": "British Virgin Islands",
+          "service_provider": null,
+          "incorporation_date": "05-MAR-2013",
+          "address": null,
+          "sourceID": "Pandora Papers - Commence Overseas"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_80CF37D80": {
+      "id": "acct_80CF37D80",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "80CF37D80",
+        "holder_entity_id": "ent_10055649",
+        "holder_metadata": {
+          "icij_node_id": 10055649,
+          "name": "QUEZEL MANAGEMENT INC.",
+          "jurisdiction": "Panama",
+          "jurisdiction_full": "Panama",
+          "service_provider": "Mossack Fonseca",
+          "incorporation_date": "19-MAY-2008",
+          "address": "HSBC PRIVATE BANK (MONACO) S.A. 17; AVENUE D'OSTENDE 98000; MONTE CARLO MONACO",
+          "sourceID": "Panama Papers"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_811C599A0": {
+      "id": "acct_811C599A0",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "811C599A0",
+        "holder_entity_id": "ent_82009979",
+        "holder_metadata": {
+          "icij_node_id": 82009979,
+          "name": "Galaxy Quantitative Fund SPC",
+          "jurisdiction": "Cayman",
+          "jurisdiction_full": "Cayman Islands",
+          "service_provider": "Appleby",
+          "incorporation_date": "29-SEP-2010",
+          "address": null,
+          "sourceID": "Paradise Papers - Appleby"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_811B83280": {
+      "id": "acct_811B83280",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "811B83280",
+        "holder_entity_id": "ent_20025246",
+        "holder_metadata": {
+          "icij_node_id": 20025246,
+          "name": "LAKELAND INVESTMENTS S.A.",
+          "jurisdiction": "Bahamas",
+          "jurisdiction_full": "Bahamas",
+          "service_provider": null,
+          "incorporation_date": "09-AUG-1994",
+          "address": null,
+          "sourceID": "Bahamas Leaks"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_812D22980": {
+      "id": "acct_812D22980",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "812D22980",
+        "holder_entity_id": "ent_171249",
+        "holder_metadata": {
+          "icij_node_id": 171249,
+          "name": "DELTA ADVISORY PTE. LTD.",
+          "jurisdiction": "Singapore",
+          "jurisdiction_full": "Singapore",
+          "service_provider": "Portcullis Trustnet",
+          "incorporation_date": "13-MAR-2002",
+          "address": "Mr Djamal Nasser Attamimi 26 Farrer Rd, #01-03 Sutton Place Singapore 268830",
+          "sourceID": "Offshore Leaks"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_804529040": {
+      "id": "acct_804529040",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "804529040",
+        "holder_entity_id": "ent_10092001",
+        "holder_metadata": {
+          "icij_node_id": 10092001,
+          "name": "KOPTECH INVESTMENTS LTD.",
+          "jurisdiction": "BVI",
+          "jurisdiction_full": "British Virgin Islands",
+          "service_provider": "Mossack Fonseca",
+          "incorporation_date": "21-MAR-2002",
+          "address": "OMNI MANAGEMENT CONSULTANCY FZE OFFICE NUMBER 425; RAS AL KHAIMAH FREE TRADE ZONE AUTHORITY  GOVERNMENT OF RAS AL KHAIMAH; P.O. BOX 10055 RAS AL KHAIMAH; UNITED ARAB EMIRATES",
+          "sourceID": "Panama Papers"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_811A9BD50": {
+      "id": "acct_811A9BD50",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "811A9BD50",
+        "holder_entity_id": "ent_167069",
+        "holder_metadata": {
+          "icij_node_id": 167069,
+          "name": "The Green Point Trust",
+          "jurisdiction": "Singapore",
+          "jurisdiction_full": "Singapore",
+          "service_provider": "Portcullis Trustnet",
+          "incorporation_date": "17-JUN-2009",
+          "address": "6 Temasek Boulevard #09-06 Suntec Tower 4 Singapore 038986",
+          "sourceID": "Offshore Leaks"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_800BFCD30": {
+      "id": "acct_800BFCD30",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "800BFCD30",
+        "holder_entity_id": "ent_10194403",
+        "holder_metadata": {
+          "icij_node_id": 10194403,
+          "name": "ADAMO PROPERTIES LIMITED",
+          "jurisdiction": "BVI",
+          "jurisdiction_full": "British Virgin Islands",
+          "service_provider": "Mossack Fonseca",
+          "incorporation_date": "02-FEB-1989",
+          "address": "CHANNEL ISLANDS & INTERNATIONAL  LAW TRUST CO. LIMITED P.O. BOX 303 CHANCERY CHAMBERS 8 DUHAMEL PLACE ST. HELIER, JERSEY JE4 8UN CHANNEL ISLANDS",
+          "sourceID": "Panama Papers"
+        },
+        "role_rationale": null
+      }
+    },
+    "acct_8020BC410": {
+      "id": "acct_8020BC410",
+      "type": "account",
+      "payload": {
+        "ibm_account_id": "8020BC410",
+        "holder_entity_id": "ent_82012096",
+        "holder_metadata": {
+          "icij_node_id": 82012096,
+          "name": "Desdemona Corp.",
+          "jurisdiction": "Cayman",
+          "jurisdiction_full": "Cayman Islands",
+          "service_provider": "Appleby",
+          "incorporation_date": "28-APR-2005",
+          "address": null,
+          "sourceID": "Paradise Papers - Appleby"
+        },
+        "role_rationale": null
+      }
+    },
+    "reg_agent_001": {
+      "id": "reg_agent_001",
+      "type": "registration",
+      "payload": {
+        "kind": "registered_agent",
+        "agent_name": "Mossack Fonseca",
+        "clients": [
+          "ent_55037966",
+          "ent_10055649"
+        ],
+        "evidence_for_pair": {
+          "a": "ent_55037966",
+          "b": "ent_10055649",
+          "rationale": "Both registered through Mossack Fonseca, linking cycle start (Paterna) and Brazil Real receiver (Quezel).",
+          "strength": "strong"
+        }
+      }
+    },
+    "reg_address_001": {
+      "id": "reg_address_001",
+      "type": "registration",
+      "payload": {
+        "kind": "shared_address",
+        "address_name": "Mossack Fonseca BVI Office, Akara Building, Road Town, Tortola",
+        "clients": [
+          "ent_240240462",
+          "ent_240247005"
+        ],
+        "evidence_for_pair": {
+          "a": "ent_240240462",
+          "b": "ent_240247005",
+          "rationale": "Both BVI entities registered at the same agent's address.",
+          "strength": "strong"
+        }
+      }
+    },
+    "ip_log_ip_001": {
+      "id": "ip_log_ip_001",
+      "type": "ip",
+      "payload": {
+        "ip_address": "203.0.113.42",
+        "users": [
+          "ent_55037966",
+          "ent_10171875"
+        ],
+        "evidence_for_pair": {
+          "a": "ent_55037966",
+          "b": "ent_10171875",
+          "rationale": "Accounting activity from the same IP — Paterna (Malta) and Tiliko (Cyprus), both EU time-zone shells.",
+          "strength": "strong"
+        }
+      }
+    },
+    "reg_nominee_001": {
+      "id": "reg_nominee_001",
+      "type": "registration",
+      "payload": {
+        "kind": "nominee_director",
+        "nominee_name": "Anonymous nominee",
+        "clients": [
+          "ent_20132624",
+          "ent_240240462"
+        ],
+        "evidence_for_pair": {
+          "a": "ent_20132624",
+          "b": "ent_240240462",
+          "rationale": "A single nominee director listed for both Miko Valley (Bahamas) and ARCH Secretaries (BVI).",
+          "strength": "weak"
+        }
+      }
+    },
+    "reg_incorp_001": {
+      "id": "reg_incorp_001",
+      "type": "registration",
+      "payload": {
+        "kind": "co_incorporation",
+        "incorporation_window": "2006-W12 (March 20-26, 2006)",
+        "clients": [
+          "ent_240247005",
+          "ent_10055649"
+        ],
+        "evidence_for_pair": {
+          "a": "ent_240247005",
+          "b": "ent_10055649",
+          "rationale": "Special Situations Global and Quezel incorporated within the same week — coordinated setup.",
+          "strength": "weak"
+        }
+      }
+    },
+    "reg_agent_002": {
+      "id": "reg_agent_002",
+      "type": "registration",
+      "payload": {
+        "kind": "registered_agent",
+        "agent_name": "Mossack Fonseca",
+        "clients": [
+          "ent_10201450",
+          "ent_171249",
+          "ent_20025246",
+          "ent_82009979"
+        ],
+        "evidence_for_pairs": [
+          {
+            "a": "ent_10201450",
+            "b": "ent_82009979",
+            "rationale": "Touch Industries (hub) and Galaxy Quantitative both Mossack Fonseca clients.",
+            "strength": "strong"
+          },
+          {
+            "a": "ent_10201450",
+            "b": "ent_20025246",
+            "rationale": "Touch Industries (hub) and Lakeland Investments share Mossack Fonseca registration.",
+            "strength": "strong"
+          },
+          {
+            "a": "ent_10201450",
+            "b": "ent_171249",
+            "rationale": "Touch Industries (hub) and Delta Advisory share Mossack Fonseca registration.",
+            "strength": "strong"
+          }
+        ]
+      }
+    },
+    "reg_bo_001": {
+      "id": "reg_bo_001",
+      "type": "registration",
+      "payload": {
+        "kind": "beneficial_owner",
+        "owner_name": "Anonymous BO",
+        "clients": [
+          "ent_10092001",
+          "ent_10194403",
+          "ent_167069",
+          "ent_82012096",
+          "ent_82012826"
+        ],
+        "evidence_for_pairs": [
+          {
+            "a": "ent_82012826",
+            "b": "ent_10092001",
+            "rationale": "Peritus Fund GP and Koptech share an ultimate beneficial owner.",
+            "strength": "strong"
+          },
+          {
+            "a": "ent_82012826",
+            "b": "ent_167069",
+            "rationale": "Peritus Fund GP and Green Point Trust share an ultimate beneficial owner.",
+            "strength": "strong"
+          },
+          {
+            "a": "ent_82012826",
+            "b": "ent_10194403",
+            "rationale": "Peritus Fund GP and Adamo Properties share an ultimate beneficial owner.",
+            "strength": "strong"
+          },
+          {
+            "a": "ent_82012826",
+            "b": "ent_82012096",
+            "rationale": "Peritus Fund GP and Desdemona Corp share an ultimate beneficial owner.",
+            "strength": "strong"
+          }
+        ]
+      }
+    }
+  },
+  "verification_failures": [
+    {
+      "edge_idx": 0,
+      "evidence_idx": 0,
+      "code": "FLOW_DIRECTION_MISMATCH",
+      "detail": "edge ent_10194403→ent_20132624 but tx_cycle_01 routes ent_55037966→ent_20132624"
+    },
+    {
+      "edge_idx": 0,
+      "evidence_idx": 1,
+      "code": "FLOW_DIRECTION_MISMATCH",
+      "detail": "edge ent_10194403→ent_20132624 but tx_cycle_02 routes ent_20132624→ent_10171875"
+    },
+    {
+      "edge_idx": 5,
+      "evidence_idx": 0,
+      "code": "FLOW_DIRECTION_MISMATCH",
+      "detail": "edge ent_82009979→ent_10201450 but tx_cycle_01 routes ent_55037966→ent_20132624"
+    },
+    {
+      "edge_idx": 6,
+      "evidence_idx": 0,
+      "code": "FLOW_DIRECTION_MISMATCH",
+      "detail": "edge ent_20025246→ent_10201450 but tx_cycle_02 routes ent_20132624→ent_10171875"
+    },
+    {
+      "edge_idx": 7,
+      "evidence_idx": 0,
+      "code": "FLOW_DIRECTION_MISMATCH",
+      "detail": "edge ent_171249→ent_10201450 but tx_cycle_03 routes ent_10171875→ent_240240462"
+    },
+    {
+      "edge_idx": 8,
+      "evidence_idx": 0,
+      "code": "FLOW_DIRECTION_MISMATCH",
+      "detail": "edge ent_82012826→ent_10092001 but tx_cycle_01 routes ent_55037966→ent_20132624"
+    },
+    {
+      "edge_idx": 9,
+      "evidence_idx": 0,
+      "code": "FLOW_DIRECTION_MISMATCH",
+      "detail": "edge ent_82012826→ent_167069 but tx_cycle_02 routes ent_20132624→ent_10171875"
+    },
+    {
+      "edge_idx": 10,
+      "evidence_idx": 0,
+      "code": "FLOW_DIRECTION_MISMATCH",
+      "detail": "edge ent_82012826→ent_10194403 but tx_cycle_03 routes ent_10171875→ent_240240462"
+    },
+    {
+      "edge_idx": 11,
+      "evidence_idx": 0,
+      "code": "FLOW_DIRECTION_MISMATCH",
+      "detail": "edge ent_82012826→ent_82012096 but tx_cycle_04 routes ent_240240462→ent_240247005"
+    }
+  ]
+}
